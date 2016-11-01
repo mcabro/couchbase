@@ -5,7 +5,8 @@ import os
 import errno
 
 jsonsDir = "data/jsons"
-jsonUrl='https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/'
+jsonUrl ='https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/'
+prepend = 'eess::'
 # creamos el directorio de destino 
 try:
     os.makedirs(jsonsDir)
@@ -21,7 +22,7 @@ data = json.load(f)
 listaEESS = data['ListaEESSPrecio']
 for i in range(0, len(listaEESS)):
    eessid = listaEESS[i]['IDEESS']
-   outfile = open(jsonsDir + '/' + str(eessid) + '.json', 'w')
+   outfile = open(jsonsDir + '/' + prepend + str(eessid) + '.json', 'w')
    json.dump(listaEESS[i], outfile)
    outfile.close()
 
